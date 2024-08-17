@@ -1,4 +1,16 @@
+import { useState } from "react";
+
 const PostForm = () => {
+  const [data, setData] = useState([
+    {
+      Title: String,
+      Description: String,
+      Author: String,
+    },
+  ]);
+
+  console.log(data);
+
   return (
     <form>
       <div className="flex p-10 w-1/2 flex-col gap-10 mx-auto">
@@ -12,7 +24,7 @@ const PostForm = () => {
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="w-11 mb-2 fill-gray-500"
+              className="w-11 mb-2 fill-gray-500"
               viewBox="0 0 32 32"
             >
               <path
@@ -26,7 +38,7 @@ const PostForm = () => {
             </svg>
             Upload Image
             <input id="UploadFile" type="file" className="hidden" />
-            <p class="text-xs font-medium text-gray-400 mt-2">
+            <p className="text-xs font-medium text-gray-400 mt-2">
               PNG, JPG SVG, WEBP, and GIF are Allowed.
             </p>
           </label>
@@ -35,12 +47,18 @@ const PostForm = () => {
             type="text"
             id="title"
             className="bg-slate-200 py-2 rounded-md pl-2"
+            value="Title"
+            onChange={(e) =>
+              setData({
+                Title: e.target.value,
+              })
+            }
           />
           <label htmlFor="description">Description</label>
           <textarea
             id="description"
             rows="4"
-            className="bg-slate-200 w-full py-72 rounded-md pl-2"
+            className="bg-slate-200 w-full pt-3 pb-72 rounded-md pl-2"
           />
           <label htmlFor="author">Author</label>
           <input
