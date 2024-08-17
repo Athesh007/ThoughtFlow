@@ -1,7 +1,6 @@
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import MainContent from "./components/MainContent";
-import PostDetails from "./components/PostDetails";
 import PostForm from "./components/PostForm";
 
 const App = () => {
@@ -9,7 +8,7 @@ const App = () => {
     <div className="min-h-screen">
       <Header />
       <MainContent />
-      {/* <PostForm /> */}
+      <PostForm />
       <Footer />
     </div>
   );

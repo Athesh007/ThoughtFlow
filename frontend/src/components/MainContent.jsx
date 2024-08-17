@@ -3,7 +3,7 @@ import PostList from "./PostList";
 import PostDetails from "./PostDetails";
 
 const MainContent = () => {
-  const [toggle,setToggle] = useState(true)
+  const [toggle,setToggle] = useState(false)
   return (
     <div className=" w-full min-h-screen">
       {toggle && <div className="absolute">

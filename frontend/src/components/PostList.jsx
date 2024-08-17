@@ -3,7 +3,7 @@ import gl from "../assets/gl.jpg";
 
 const PostList = ({toggle,setToggle}) => {
   return (
-    <div className="w-full border-grey-300 border-2 shadow-lg rounded-lg cursor-pointer p-6">
+    <div className="w-full border-grey-300 border-2 shadow-lg rounded-lg p-6">
       <div>
         <img src={gl} className="rounded-md" />
       </div>

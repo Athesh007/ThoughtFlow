@@ -3,13 +3,19 @@ import { useState } from "react";
 const PostForm = () => {
   const [data, setData] = useState(
     {
-      Title: String,
-      Description: String,
-      Author: String,
-    },
+      title: "",
+      description: "",
+      author: "",
+    }
   );
 
-
+  const [error,setError] = useState(
+    {
+      title: true,
+      description: true,
+      author: true,
+    }
+  )
   return (
     <div className="w-[60%] mx-auto">
       <div className="font-semibold text-4xl flex justify-center pt-10">
@@ -21,20 +27,32 @@ const PostForm = () => {
           <input
             type="text"
             name="title"
-            className="bg-slate-200 py-2 rounded-md pl-2 outline-none"
+            className={`bg-slate-200 py-2 rounded-md pl-2 outline-none ${data.title.length===0 ? 'border-none'
+              :error.title?'border-2 border-red-500':'border-none'}`}
             onChange={(event) =>{
               setData((prev)=>({...prev,[event.target.name]:event.target.value}))
-              console.log(data)}
+              if(data.title.length>=5){
+                  setError((prev)=>({...prev,[event.target.name]:false}))
+                  console.log(error)
+                }else if(error.title === "false"){
+                  setError((prev)=>({...prev,[event.target.name]:true}))
+                }
+              }
             }
           />
           <label htmlFor="description">Description</label>
           <textarea
             name="description"
             rows="4"
-            className="bg-slate-200 w-full p-2 text-lg outline-none h-[350px] resize-none rounded-md "
+            className={`bg-slate-200 w-full p-2 text-lg outline-none h-[350px] resize-none rounded-md`}
             onChange={(event) =>{
-              setData((prev)=>({...prev,[event.target.name]:event.target.value}))
-              console.log(data)}
+                setData((prev)=>({...prev,[event.target.name]:event.target.value}))
+                if(data.description.length>=5){
+                  setError((prev)=>({...prev,[event.target.name]:false}))
+                }else if(error.description === "false"){
+                  setError((prev)=>({...prev,[event.target.name]:true}))
+                }
+              }
             }
           />
           <label htmlFor="author">Author</label>
@@ -42,10 +60,15 @@ const PostForm = () => {
             type="text"
             name="author"
             onChange={(event) =>{
-              setData((prev)=>({...prev,[event.target.name]:event.target.value}))
-              console.log(data)}
+                setData((prev)=>({...prev,[event.target.name]:event.target.value}))
+                if(data.author.length>=5){
+                  setError((prev)=>({...prev,[event.target.name]:false}))
+                }else if(error.author === "false"){
+                  setError((prev)=>({...prev,[event.target.name]:true}))
+                }
+              }
             }
-            className="bg-slate-200 py-2 rounded-md pl-2 outline-none"
+            className='bg-slate-200 py-2 rounded-md pl-2 outline-none '
           />
         </div>
         <div className="flex flex-col gap-4">
@@ -74,7 +97,9 @@ const PostForm = () => {
               PNG, JPG SVG, WEBP, and GIF are Allowed.
             </p>
           </label>
-          <button className="bg-black text-md rounded-md text-white font-semibold w-full py-2">
+          <button className="bg-black text-md rounded-md text-white font-semibold w-full py-2"
+          // onClick={handleSubmit}
+          >
             POST
           </button>
         </div>
