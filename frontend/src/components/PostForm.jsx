@@ -1,26 +1,58 @@
 import { useState } from "react";
 
 const PostForm = () => {
-  const [data, setData] = useState([
+  const [data, setData] = useState(
     {
       Title: String,
       Description: String,
       Author: String,
     },
-  ]);
+  );
 
-  console.log(data);
 
   return (
-    <form>
-      <div className="flex p-10 w-1/2 flex-col gap-10 mx-auto">
-        <div className="font-semibold text-4xl flex justify-center">
-          <h1>NEW POST</h1>
+    <div className="w-[60%] mx-auto">
+      <div className="font-semibold text-4xl flex justify-center pt-10">
+        <h1>NEW POST</h1>
+      </div>
+      <form className="flex gap-10 w-full py-10">
+        <div className="flex flex-col gap-2 font-semibold text-lg w-full">
+          <label htmlFor="title">Title</label>
+          <input
+            type="text"
+            name="title"
+            className="bg-slate-200 py-2 rounded-md pl-2 outline-none"
+            onChange={(event) =>{
+              setData((prev)=>({...prev,[event.target.name]:event.target.value}))
+              console.log(data)}
+            }
+          />
+          <label htmlFor="description">Description</label>
+          <textarea
+            name="description"
+            rows="4"
+            className="bg-slate-200 w-full p-2 text-lg outline-none h-[350px] resize-none rounded-md "
+            onChange={(event) =>{
+              setData((prev)=>({...prev,[event.target.name]:event.target.value}))
+              console.log(data)}
+            }
+          />
+          <label htmlFor="author">Author</label>
+          <input
+            type="text"
+            name="author"
+            onChange={(event) =>{
+              setData((prev)=>({...prev,[event.target.name]:event.target.value}))
+              console.log(data)}
+            }
+            className="bg-slate-200 py-2 rounded-md pl-2 outline-none"
+          />
         </div>
-        <div className="flex flex-col gap-2 font-semibold text-lg">
+        <div className="flex flex-col gap-4">
+          <div className="font-semibold text-lg">Upload Image</div>
           <label
             htmlFor="UploadFile"
-            className="flex items-center flex-col bg-slate-200 p-10 rounded-md"
+            className="flex items-center flex-col bg-slate-200 p-10 rounded-md cursor-pointer"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -34,7 +66,7 @@ const PostForm = () => {
               <path
                 d="M20.293 19.707a1 1 0 0 0 1.414-1.414l-5-5a1 1 0 0 0-1.414 0l-5 5a1 1 0 0 0 1.414 1.414L15 16.414V29a1 1 0 0 0 2 0V16.414z"
                 data-original="#000000"
-              />
+               />
             </svg>
             Upload Image
             <input id="UploadFile" type="file" className="hidden" />
@@ -42,37 +74,14 @@ const PostForm = () => {
               PNG, JPG SVG, WEBP, and GIF are Allowed.
             </p>
           </label>
-          <label htmlFor="title">Title</label>
-          <input
-            type="text"
-            id="title"
-            className="bg-slate-200 py-2 rounded-md pl-2"
-            value="Title"
-            onChange={(e) =>
-              setData({
-                Title: e.target.value,
-              })
-            }
-          />
-          <label htmlFor="description">Description</label>
-          <textarea
-            id="description"
-            rows="4"
-            className="bg-slate-200 w-full pt-3 pb-72 rounded-md pl-2"
-          />
-          <label htmlFor="author">Author</label>
-          <input
-            type="text"
-            id="author"
-            className="bg-slate-200 py-2 rounded-md pl-2"
-          />
+          <button className="bg-black text-md rounded-md text-white font-semibold w-full py-2">
+            POST
+          </button>
         </div>
-        <button className=" bg-black text-md rounded-md text-white font-semibold py-2">
-          POST
-        </button>
-      </div>
-    </form>
+      </form>
+    </div>
   );
 };
+
 
 export default PostForm;

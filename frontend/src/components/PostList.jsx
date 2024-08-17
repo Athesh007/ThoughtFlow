@@ -1,16 +1,17 @@
+import { useState } from "react";
 import gl from "../assets/gl.jpg";
 
-const PostList = () => {
+const PostList = ({toggle,setToggle}) => {
   return (
-    <div className="w-1/4 border-gray-100 border-2 shadow-lg rounded-lg cursor-pointer">
-      <div className="p-2">
+    <div className="w-full border-grey-300 border-2 shadow-lg rounded-lg cursor-pointer p-6">
+      <div>
         <img src={gl} className="rounded-md" />
       </div>
-      <div className="px-4">
-        <div className="py-4 font-semibold text-2xl">
+      <div>
+        <div className="pt-4 font-semibold text-2xl">
           <h1>HELLO WORLD</h1>
         </div>
-        <div className="py-2">
+        <div className="pb-4 pt-2">
           <p>
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id
             repellat quae, iusto blanditiis animi reprehenderit? Sunt illum
@@ -19,12 +20,13 @@ const PostList = () => {
             quo veniam voluptas error officiis?
           </p>
         </div>
-        <div className=" flex justify-between border-gray-300 border-t-2 py-2">
+        <div className=" flex justify-between border-gray-300 border-t-2 pt-4">
           <div className="flex justify-center items-center">
             <h1>Athesh A</h1>
           </div>
           <div>
-            <button className="px-4 py-2 bg-black text-white rounded-md">
+            <button className="px-4 py-2 bg-black text-white rounded-md"
+             onClick={()=>setToggle(!toggle)}>
               Read More
             </button>
           </div>

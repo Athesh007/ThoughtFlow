@@ -6,11 +6,10 @@ import PostForm from "./components/PostForm";
 
 const App = () => {
   return (
-    <div className=" overflow-y-hidden">
+    <div className="min-h-screen">
       <Header />
-      {/* <MainContent />
-      <PostDetails /> */}
-      <PostForm />
+      <MainContent />
+      {/* <PostForm /> */}
       <Footer />
     </div>
   );
