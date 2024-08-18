@@ -1,74 +1,87 @@
 import { useState } from "react";
 
-const PostForm = () => {
-  const [data, setData] = useState(
-    {
-      title: "",
-      description: "",
-      author: "",
-    }
-  );
+const PostForm = ({ setDetails }) => {
+  const [data, setData] = useState({
+    title: "",
+    description: "",
+    author: "",
+  });
 
-  const [error,setError] = useState(
-    {
-      title: true,
-      description: true,
-      author: true,
-    }
-  )
+  const [error, setError] = useState({
+    title: true,
+    description: true,
+    author: true,
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setDetails((prev) => [...prev, data]);
+  };
+
   return (
     <div className="w-[60%] mx-auto">
       <div className="font-semibold text-4xl flex justify-center pt-10">
         <h1>NEW POST</h1>
       </div>
-      <form className="flex gap-10 w-full py-10">
+      <form onSubmit={handleSubmit} className="flex gap-10 w-full py-10">
         <div className="flex flex-col gap-2 font-semibold text-lg w-full">
           <label htmlFor="title">Title</label>
           <input
             type="text"
             name="title"
-            className={`bg-slate-200 py-2 rounded-md pl-2 outline-none ${data.title.length===0 ? 'border-none'
-              :error.title?'border-2 border-red-500':'border-none'}`}
-            onChange={(event) =>{
-              setData((prev)=>({...prev,[event.target.name]:event.target.value}))
-              if(data.title.length>=5){
-                  setError((prev)=>({...prev,[event.target.name]:false}))
-                  console.log(error)
-                }else if(error.title === "false"){
-                  setError((prev)=>({...prev,[event.target.name]:true}))
-                }
+            className={`bg-slate-200 py-2 rounded-md pl-2 outline-none ${
+              data.title.length === 0
+                ? "border-none"
+                : error.title
+                ? "border-2 border-red-500"
+                : "border-none"
+            }`}
+            onChange={(event) => {
+              setData((prev) => ({
+                ...prev,
+                [event.target.name]: event.target.value,
+              }));
+              if (data.title.length >= 5) {
+                setError((prev) => ({ ...prev, [event.target.name]: false }));
+                console.log(error);
+              } else if (error.title === "false") {
+                setError((prev) => ({ ...prev, [event.target.name]: true }));
               }
-            }
+            }}
           />
           <label htmlFor="description">Description</label>
           <textarea
             name="description"
             rows="4"
             className={`bg-slate-200 w-full p-2 text-lg outline-none h-[350px] resize-none rounded-md`}
-            onChange={(event) =>{
-                setData((prev)=>({...prev,[event.target.name]:event.target.value}))
-                if(data.description.length>=5){
-                  setError((prev)=>({...prev,[event.target.name]:false}))
-                }else if(error.description === "false"){
-                  setError((prev)=>({...prev,[event.target.name]:true}))
-                }
+            onChange={(event) => {
+              setData((prev) => ({
+                ...prev,
+                [event.target.name]: event.target.value,
+              }));
+              if (data.description.length >= 5) {
+                setError((prev) => ({ ...prev, [event.target.name]: false }));
+              } else if (error.description === "false") {
+                setError((prev) => ({ ...prev, [event.target.name]: true }));
               }
-            }
+            }}
           />
           <label htmlFor="author">Author</label>
           <input
             type="text"
             name="author"
-            onChange={(event) =>{
-                setData((prev)=>({...prev,[event.target.name]:event.target.value}))
-                if(data.author.length>=5){
-                  setError((prev)=>({...prev,[event.target.name]:false}))
-                }else if(error.author === "false"){
-                  setError((prev)=>({...prev,[event.target.name]:true}))
-                }
+            onChange={(event) => {
+              setData((prev) => ({
+                ...prev,
+                [event.target.name]: event.target.value,
+              }));
+              if (data.author.length >= 5) {
+                setError((prev) => ({ ...prev, [event.target.name]: false }));
+              } else if (error.author === "false") {
+                setError((prev) => ({ ...prev, [event.target.name]: true }));
               }
-            }
-            className='bg-slate-200 py-2 rounded-md pl-2 outline-none '
+            }}
+            className="bg-slate-200 py-2 rounded-md pl-2 outline-none "
           />
         </div>
         <div className="flex flex-col gap-4">
@@ -89,7 +102,7 @@ const PostForm = () => {
               <path
                 d="M20.293 19.707a1 1 0 0 0 1.414-1.414l-5-5a1 1 0 0 0-1.414 0l-5 5a1 1 0 0 0 1.414 1.414L15 16.414V29a1 1 0 0 0 2 0V16.414z"
                 data-original="#000000"
-               />
+              />
             </svg>
             Upload Image
             <input id="UploadFile" type="file" className="hidden" />
@@ -97,9 +110,7 @@ const PostForm = () => {
               PNG, JPG SVG, WEBP, and GIF are Allowed.
             </p>
           </label>
-          <button className="bg-black text-md rounded-md text-white font-semibold w-full py-2"
-          // onClick={handleSubmit}
-          >
+          <button className="bg-black text-md rounded-md text-white font-semibold w-full py-2">
             POST
           </button>
         </div>
@@ -107,6 +118,5 @@ const PostForm = () => {
     </div>
   );
 };
-
 
 export default PostForm;
