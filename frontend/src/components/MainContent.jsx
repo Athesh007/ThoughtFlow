@@ -4,12 +4,13 @@ import PostDetails from "./PostDetails";
 
 const MainContent = ({ details }) => {
   const [toggle, setToggle] = useState(false);
+  const [fullDetail, setFullDetail] = useState(null);
 
   return (
     <div className=" w-full min-h-screen">
       {toggle && (
         <div className="absolute">
-          <PostDetails details={details} setToggle={setToggle} />
+          <PostDetails fullDetail={fullDetail} setToggle={setToggle} />
         </div>
       )}
       <div className="pb-20 px-20 pt-10">
@@ -17,8 +18,13 @@ const MainContent = ({ details }) => {
           <p>BLOGS</p>
         </div>
         <div className="grid grid-cols-3 gap-10 w-full">
-          {details.map(() => (
-            <PostList toggle={toggle} setToggle={setToggle} details={details} />
+          {details.map((detail) => (
+            <PostList
+              toggle={toggle}
+              setFullDetail={setFullDetail}
+              setToggle={setToggle}
+              details={detail}
+            />
           ))}
         </div>
       </div>

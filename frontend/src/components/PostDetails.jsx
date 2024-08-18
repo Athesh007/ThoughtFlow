@@ -1,7 +1,7 @@
 import gl from "../assets/gl.jpg";
 
-const PostDetails = ({ setToggle, details }) => {
-  const [{ title, description, author }] = details;
+const PostDetails = ({ setToggle, fullDetail }) => {
+  const { title, description, author } = fullDetail;
 
   return (
     <div>
