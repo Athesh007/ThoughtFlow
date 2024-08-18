@@ -1,5 +1,9 @@
-import http from "http";
+import express from "express";
 
-const server = http.createServer(() => {});
+const app = express();
 
-server.listen(8000, () => console.log("server Up"));
+app.get("/", (req, res) => {
+  res.send("HomePage");
+});
+
+app.listen(8000, () => console.log("Server Up"));
