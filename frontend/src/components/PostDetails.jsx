@@ -6,7 +6,7 @@ const PostDetails = ({ setToggle, fullDetail }) => {
   return (
     <div>
       <div className="fixed inset-0 bg-black/90"></div>
-      <div className="flex w-[60%] flex-col mx-auto bg-white rounded-lg relative">
+      <div className="flex lg:w-[60%] md:w-[60%] flex-col mx-auto bg-white rounded-lg relative">
         <button
           className="absolute text-black flex justify-end w-full p-3"
           onClick={() => setToggle(false)}

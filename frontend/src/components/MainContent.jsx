@@ -7,17 +7,17 @@ const MainContent = ({ details }) => {
   const [fullDetail, setFullDetail] = useState(null);
 
   return (
-    <div className=" w-full min-h-screen">
+    <div className="w-full min-h-screen">
       {toggle && (
         <div className="absolute">
           <PostDetails fullDetail={fullDetail} setToggle={setToggle} />
         </div>
       )}
-      <div className="pb-20 px-20 pt-10">
+      <div className="pb-20 lg:px-20 px-6 pt-10">
         <div className="font-semibold text-3xl pb-10">
           <p>BLOGS</p>
         </div>
-        <div className="grid grid-cols-3 gap-10 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 w-full">
           {details.map((detail) => (
             <PostList
               toggle={toggle}

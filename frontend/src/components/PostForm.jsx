@@ -26,11 +26,11 @@ const PostForm = ({ setDetails }) => {
   };
 
   return (
-    <div className="w-[60%] mx-auto">
+    <div className="lg:w-[60%] md:w-[60%] mx-auto">
       <div className="font-semibold text-4xl flex justify-center pt-10">
         <h1>NEW POST</h1>
       </div>
-      <form onSubmit={handleSubmit} className="flex gap-10 w-full py-10">
+      <form onSubmit={handleSubmit} className="flex lg:flex-row md:flex-row flex-col gap-10 w-full py-10">
         <div className="flex flex-col gap-2 font-semibold text-lg w-full">
           <label htmlFor="title">Title</label>
           <input
