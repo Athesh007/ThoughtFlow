@@ -1,10 +1,14 @@
-import express from "express";
-import db from "./db/db.js";
+import cors from 'cors';
+import express from 'express';
+import router from "./router/posts.js";
 
 const app = express();
 
-app.get("/", (req, res) => {
-  res.send("HomePage");
-});
+app.use(cors());
+app.use(express.json());
 
-app.listen(8000, () => console.log("Server Up"));
+app.use('/posts', router);
+
+app.listen(() => {
+  console.log(`Listening on port 3000`);
+});
