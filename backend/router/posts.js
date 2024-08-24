@@ -10,22 +10,22 @@ router.get('/', async (req, res) => {
 
 //post - /posts
 router.post('/', async (req, res) => {
-  const { title, description } = req.body;
-  const newPost = new Post({ title, description, author: req.user._id });
+  const { title, description, _id } = req.body;
+  const newPost = new Post({ title, description, author: _id });
   await newPost.save();
   res.status(201).json({ message: 'Post created successfully' });
 });
 
 //get - post/:id
 router.get('/:id', async (req, res) => {
-  const post = await Post.findById(req.body.id).populate('author');
+  const post = await Post.find({author:req.params.id})
   res.json(post);
 });
 
 //put - post/:id
 router.put('/:id', async (req, res) => {
-  const post = await Post.findById(req.body.id);
-  if (post.author.toString() !== req.user._id.toString()) {
+  const post = await Post.find({author:req.params.id});
+  if (post.author.toString() !== req.params._id.toString()) {
     return res.status(403).json({ error: 'Unauthorized' });
   }
   post.set(req.body);
@@ -35,7 +35,7 @@ router.put('/:id', async (req, res) => {
 
 //delete - posts/:id
 router.delete('/:id', async (req, res) => {
-  const post = await Post.findById(req.body.id);
+  const post = await Post.find({author:req.params.id});
   if (post.author.toString() !== req.user._id.toString()) {
     return res.status(403).json({ error: 'Unauthorized' });
   }

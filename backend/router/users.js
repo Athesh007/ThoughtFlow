@@ -4,9 +4,9 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import 'dotenv/config'
 
-const router = Router();
+const userrouter = Router();
 
-router.post('/register', async (req, res) => {
+userrouter.post('/register', async (req, res) => {
   try {
     const { username, email, password } = req.body;
     const existingUser = await User.findOne({ email });
@@ -16,17 +16,19 @@ router.post('/register', async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({ username, email, password: hashedPassword });
     await newUser.save();
-    const token = jwt.sign({ userId: newUser._id }, process.env.JWT_KEY, { expiresIn: '1h' });
+    const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
 
-    res.status(201).json({ message: 'User created successfully', token });
+    console.log(newUser)
+    res.status(201).json({ message: 'User created successfully', newUser});
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal server error' });
   }
 });
 
+
 // Login
-router.post('/login', async (req, res) => {
+userrouter.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
@@ -39,12 +41,12 @@ router.post('/login', async (req, res) => {
       return res.status(400).json({ message: 'Invalid email or password' });
     }
 
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_KEY, { expiresIn: '1h' });
-    res.json({ message: 'Login successful', token });
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
+    res.json({ message: 'Login successful', user });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal server error' });
   }
 });
 
-export default router;
+export default userrouter;
