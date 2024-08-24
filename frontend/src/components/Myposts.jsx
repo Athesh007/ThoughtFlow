@@ -2,20 +2,22 @@ import { useEffect, useState } from "react";
 import PostList from "./PostList";
 import PostDetails from "./PostDetails";
 
-const MainContent = () => {
+const Myposts = () => {
   const [toggle, setToggle] = useState(false);
   const [fullDetail, setFullDetail] = useState(null);
   const [readmore, setReadmore] = useState(null);
 
   useEffect(() => {
     const res = async () => {
-      const myposts = await fetch(`http://localhost:3000/posts`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }).then((res) => res.json());
-      console.log(myposts);
+      const myposts = await fetch(
+        `http://localhost:3000/posts/${localStorage.getItem("user")}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      ).then((res) => res.json());
       setFullDetail(myposts);
     };
     res();
@@ -34,7 +36,6 @@ const MainContent = () => {
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 w-full">
           {fullDetail &&
-            !window.location.href.toString().includes("myposts") &&
             fullDetail.map((detail, index) => (
               <PostList
                 key={index}
@@ -50,4 +51,4 @@ const MainContent = () => {
   );
 };
 
-export default MainContent;
+export default Myposts;

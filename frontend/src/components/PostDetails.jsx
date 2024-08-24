@@ -1,7 +1,8 @@
+/* eslint-disable react/prop-types */
 import gl from "../assets/gl.jpg";
 
-const PostDetails = ({ setToggle, fullDetail }) => {
-  const { title, description, author } = fullDetail;
+const PostDetails = ({ setToggle, readmore }) => {
+  const { title, description, author } = readmore;
 
   return (
     <div>
@@ -34,7 +35,7 @@ const PostDetails = ({ setToggle, fullDetail }) => {
         </div>
         <div className="p-10 pt-0">
           <div className="py-4 text-lg font-medium">
-            <p>Author: {author}</p>
+            <p>Author: {author.username}</p>
           </div>
           <div>
             <p>{description}</p>

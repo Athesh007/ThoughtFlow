@@ -1,10 +1,9 @@
 import { useState } from "react";
 
-const PostForm = ({ setDetails }) => {
+const PostForm = () => {
   const [data, setData] = useState({
     title: "",
     description: "",
-    author: "",
   });
 
   const [image, setImage] = useState(null);
@@ -12,13 +11,19 @@ const PostForm = ({ setDetails }) => {
   const [error, setError] = useState({
     title: true,
     description: true,
-    author: true,
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setDetails((prev) => [...prev, data]);
-    console.log("Submitted");
+    data.id = localStorage.getItem("user");
+    const login = await fetch("http://localhost:3000/posts", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => res.json());
+    console.log(login);
   };
 
   const handleImage = (e) => {
@@ -30,7 +35,10 @@ const PostForm = ({ setDetails }) => {
       <div className="font-semibold text-4xl flex justify-center pt-10">
         <h1>NEW POST</h1>
       </div>
-      <form onSubmit={handleSubmit} className="flex lg:flex-row md:flex-row flex-col gap-10 w-full py-10">
+      <form
+        onSubmit={handleSubmit}
+        className="flex lg:flex-row md:flex-row flex-col gap-10 w-full py-10"
+      >
         <div className="flex flex-col gap-2 font-semibold text-lg w-full">
           <label htmlFor="title">Title</label>
           <input
@@ -74,24 +82,6 @@ const PostForm = ({ setDetails }) => {
                 setError((prev) => ({ ...prev, [event.target.name]: true }));
               }
             }}
-          />
-          <label htmlFor="author">Author</label>
-          <input
-            required
-            type="text"
-            name="author"
-            onChange={(event) => {
-              setData((prev) => ({
-                ...prev,
-                [event.target.name]: event.target.value,
-              }));
-              if (data.author.length >= 5) {
-                setError((prev) => ({ ...prev, [event.target.name]: false }));
-              } else if (error.author === "false") {
-                setError((prev) => ({ ...prev, [event.target.name]: true }));
-              }
-            }}
-            className="bg-slate-200 py-2 rounded-md pl-2 outline-none "
           />
         </div>
         <div className="flex flex-col gap-4">
