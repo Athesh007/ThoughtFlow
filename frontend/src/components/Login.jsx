@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [data, setData] = useState();
+  const navigate = useNavigate();
 
   const handlesubmit = async (event) => {
     event.preventDefault();
@@ -12,7 +14,12 @@ const Login = () => {
         "Content-Type": "application/json",
       },
     }).then((res) => res.json());
-    localStorage.setItem("user", login.user._id);
+    if (login.message === "Login successful") {
+      localStorage.setItem("user", login.user._id);
+      navigate("/"); // Redirect to the homepage after successful login
+    } else {
+      alert("Please enter the correct email and password");
+    }
   };
 
   const handlechange = (event) => {
@@ -23,7 +30,7 @@ const Login = () => {
     <div className="w-full h-full overflow-hidden flex justify-center">
       <form
         onSubmit={handlesubmit}
-        className="border border-neutral-500 flex flex-col gap-2 w-[280px] p-4 rounded-lg py-6"
+        className="border border-neutral-500 flex flex-col gap-2 w-[500px] p-4 rounded-lg py-6"
       >
         <div className="w-full  flex justify-center text-3xl font-semibold pb-6">
           Login
@@ -44,7 +51,13 @@ const Login = () => {
           type="password"
           name="password"
         />
-        <button className="p-2 bg-black text-white rounded-xl">Submit</button>
+        <button className="p-2 bg-black text-white rounded-xl">Log In</button>
+        <Link to="/register">
+          <button className="border-2 p-2 text-blue-900 font-bold w-full rounded-xl">
+            <span className="text-black font-normal">Create new account </span>
+            Register
+          </button>
+        </Link>
       </form>
     </div>
   );

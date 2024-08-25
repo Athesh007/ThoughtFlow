@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [data, setData] = useState();
+  const navigation = useNavigate();
 
   const handlesubmit = async (event) => {
     event.preventDefault();
@@ -12,7 +14,12 @@ const Register = () => {
         "Content-Type": "application/json",
       },
     }).then((res) => res.json());
-    localStorage.setItem("user", register.newUser._id);
+    if (register.message === "User created successfully") {
+      localStorage.setItem("user", register.newUser._id);
+      navigation("/login");
+    } else {
+      alert(register.message);
+    }
   };
   const handlechange = (event) => {
     setData((prev) => ({ ...prev, [event.target.name]: event.target.value }));
@@ -22,7 +29,7 @@ const Register = () => {
     <div className="w-full h-full overflow-hidden flex justify-center">
       <form
         onSubmit={handlesubmit}
-        className="border border-neutral-500 flex flex-col gap-2 w-[280px] p-4 rounded-lg py-6"
+        className="border border-neutral-500 flex flex-col gap-2 w-[500px] p-4 rounded-lg py-6"
       >
         <div className="w-full  flex justify-center text-3xl font-semibold pb-6">
           Register
@@ -51,7 +58,15 @@ const Register = () => {
           type="password"
           name="password"
         />
-        <button className="p-2 bg-black text-white rounded-xl">Submit</button>
+        <button className="p-2 bg-black text-white rounded-xl">Register</button>
+        <Link to="/login">
+          <button className="border-2 text-blue-900 font-bold p-2 w-full rounded-xl">
+            <span className="text-black font-normal">
+              Already have account{" "}
+            </span>
+            Log In
+          </button>
+        </Link>
       </form>
     </div>
   );

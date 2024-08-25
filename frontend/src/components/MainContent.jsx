@@ -15,7 +15,7 @@ const MainContent = () => {
           "Content-Type": "application/json",
         },
       }).then((res) => res.json());
-      console.log(myposts);
+
       setFullDetail(myposts);
     };
     res();

@@ -1,7 +1,14 @@
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 const Header = () => {
-  console.log(localStorage.getItem("user"));
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    setIsLoggedIn(!!user);
+  }, []);
+
   return (
     <div className=" p-4 shadow-md flex justify-between items-center">
       <Link to="/">
@@ -9,7 +16,7 @@ const Header = () => {
           ThoughtFlow
         </h1>
       </Link>
-      {localStorage.getItem("user") ? (
+      {isLoggedIn ? (
         <div className="flex justify-center items-center gap-4">
           <Link
             to="myposts"
