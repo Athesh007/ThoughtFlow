@@ -20,5 +20,3 @@ app.use("/user", userrouter);
 app.listen(3001, () => {
   console.log(`Listening on port 3000`);
 });
-
-export default db;
