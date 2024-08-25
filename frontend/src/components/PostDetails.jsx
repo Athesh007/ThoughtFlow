@@ -35,7 +35,9 @@ const PostDetails = ({ setToggle, readmore }) => {
         </div>
         <div className="p-10 pt-0">
           <div className="py-4 text-lg font-medium">
-            <p>Author: {author.username}</p>
+            {!window.location.href.toString().includes("myposts") && (
+              <p>Author: {author.username}</p>
+            )}
           </div>
           <div>
             <p>{description}</p>

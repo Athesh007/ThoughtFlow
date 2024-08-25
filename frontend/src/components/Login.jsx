@@ -20,6 +20,7 @@ const Login = () => {
     if (login.message === "Login successful") {
       localStorage.setItem("user", login.user._id);
       navigate("/");
+      navigate(0);
     } else {
       alert("Please enter the correct email and password");
     }

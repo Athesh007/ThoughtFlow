@@ -17,6 +17,6 @@ app.get("/", (req, res) => res.send("Express on Vercel"));
 app.use("/posts", router);
 app.use("/user", userrouter);
 
-app.listen(3001, () => {
+app.listen(3000, () => {
   console.log(`Listening on port 3000`);
 });
