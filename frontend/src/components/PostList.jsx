@@ -60,6 +60,7 @@ const PostList = ({ toggle, setToggle, details, setReadmore }) => {
       const result = await response.json();
       if (response.ok) {
         setIsEditing(false);
+        window.location.reload();
       } else {
         alert(result.error || "An error occurred while updating the post.");
       }
