@@ -46,6 +46,7 @@ const PostList = ({ toggle, setToggle, details, setReadmore }) => {
 
   const handleUpdate = async () => {
     try {
+      data._id = details.author;
       const response = await fetch(
         `${import.meta.env.VITE_CONNECTIVITY}/posts/${details._id}`,
         {
@@ -59,7 +60,7 @@ const PostList = ({ toggle, setToggle, details, setReadmore }) => {
       const result = await response.json();
       if (response.ok) {
         setIsEditing(false);
-        alert(result.message);
+        window.location.reload();
       } else {
         alert(result.error || "An error occurred while updating the post.");
       }
@@ -132,7 +133,7 @@ const PostList = ({ toggle, setToggle, details, setReadmore }) => {
                 error.title || error.description ? "opacity-50" : ""
               }`}
               onClick={() => {
-                console.log("backend error");
+                handleUpdate();
               }}
               disabled={error.title || error.description}
             >

@@ -25,12 +25,15 @@ router.get("/:id", async (req, res) => {
 
 //put - post/:id
 router.put("/:id", async (req, res) => {
-  const post = await Post.find({ author: req.params.id });
-  if (post.author.toString() !== req.params._id.toString()) {
-    return res.status(403).json({ error: "Unauthorized" });
-  }
-  post.set(req.body);
-  await post.save();
+  const post = await Post.findOneAndUpdate(
+    { _id: req.params.id },
+    {
+      title: req.body.title,
+      description: req.body.description,
+      author: req.body.author,
+    }
+  );
+
   res.json({ message: "Post updated successfully" });
 });
 
