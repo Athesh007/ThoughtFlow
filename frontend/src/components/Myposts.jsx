@@ -10,7 +10,9 @@ const Myposts = () => {
   useEffect(() => {
     const res = async () => {
       const myposts = await fetch(
-        `http://localhost:3000/posts/${localStorage.getItem("user")}`,
+        `${import.meta.env.VITE_CONNECTIVITY}/posts/${localStorage.getItem(
+          "user"
+        )}`,
         {
           method: "GET",
           headers: {

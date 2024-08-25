@@ -7,16 +7,19 @@ const Login = () => {
 
   const handlesubmit = async (event) => {
     event.preventDefault();
-    const login = await fetch("http://localhost:3000/user/login", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then((res) => res.json());
+    const login = await fetch(
+      `${import.meta.env.VITE_CONNECTIVITY}/user/login`,
+      {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    ).then((res) => res.json());
     if (login.message === "Login successful") {
       localStorage.setItem("user", login.user._id);
-      navigate("/"); // Redirect to the homepage after successful login
+      navigate("/");
     } else {
       alert("Please enter the correct email and password");
     }

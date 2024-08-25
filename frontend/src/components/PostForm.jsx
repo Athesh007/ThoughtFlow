@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const PostForm = () => {
+  const navigation = useNavigate();
   const [data, setData] = useState({
     title: "",
     description: "",
@@ -15,14 +17,18 @@ const PostForm = () => {
     e.preventDefault();
     if (!error.title && !error.description) {
       data.id = localStorage.getItem("user");
-      const response = await fetch("http://localhost:3000/posts", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }).then((res) => res.json());
+      const response = await fetch(
+        `${import.meta.env.VITE_CONNECTIVITY}/posts`,
+        {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      ).then((res) => res.json());
     }
+    navigation("/myposts");
   };
 
   return (

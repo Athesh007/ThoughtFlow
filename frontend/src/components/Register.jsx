@@ -7,13 +7,16 @@ const Register = () => {
 
   const handlesubmit = async (event) => {
     event.preventDefault();
-    const register = await fetch("http://localhost:3000/user/register", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then((res) => res.json());
+    const register = await fetch(
+      `${import.meta.env.VITE_CONNECTIVITY}/user/register`,
+      {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    ).then((res) => res.json());
     if (register.message === "User created successfully") {
       localStorage.setItem("user", register.newUser._id);
       navigation("/login");

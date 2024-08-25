@@ -9,12 +9,15 @@ const MainContent = () => {
 
   useEffect(() => {
     const res = async () => {
-      const myposts = await fetch(`http://localhost:3000/posts`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }).then((res) => res.json());
+      const myposts = await fetch(
+        `${import.meta.env.VITE_CONNECTIVITY}/posts`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      ).then((res) => res.json());
 
       setFullDetail(myposts);
     };

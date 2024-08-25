@@ -6,7 +6,6 @@ const router = Router();
 router.get("/", async (req, res) => {
   const posts = await Post.find().populate("author", "username");
   res.json(posts);
-  console.log(posts);
 });
 
 //post - /posts
@@ -14,7 +13,6 @@ router.post("/", async (req, res) => {
   const { title, description, id } = req.body;
 
   const newPost = new Post({ title, description, author: id });
-  console.log(newPost);
   await newPost.save();
   res.status(201).json({ message: "Post created successfully" });
 });
